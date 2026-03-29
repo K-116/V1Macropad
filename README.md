@@ -1,9 +1,5 @@
 # K116's hackpad 
-this is my hackpad for blueprint, I added an oled, button and rotary encoder to the project.
-
-<p>ONSHAPE</p>
-<p>Step file https://cad.onshape.com/documents/53970a0e40c7be582164b5b2</p>
-STL file https://cad.onshape.com/documents/e3ab6d09a4a62c87929e158c/w/aa8be712dae7738961bf0ff9/e/33b14d75e8b4cdbd8fc13b98
+this is my hackpad for blueprint, I added an oled, button and rotary encoder to the project. I used FreeCad instead on Fusion360 the project file is avaliable.
 
 <h2>Here is a my 3d design</h2>
 <img width="1055" height="982" alt="image" src="https://github.com/user-attachments/assets/496b5c8b-5761-448a-bde7-280686290e01" />
