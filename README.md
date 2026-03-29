@@ -13,10 +13,12 @@ this is my hackpad for blueprint, I added an oled, button and rotary encoder to 
 <h2>Main takeaways</h2>
 This project was definitely a learning experience, this was my first ever pcb and was my first time ever using KICAD. Although the tutorial used fusion 360, I learned that FreeCAD was much easier for me so I used that. I watched alot of Youtube videos to get the basics of KICAD (schematics, matrix, pcb routing) although connecting the 3d models to the components was a great challenge.
 
-The main goal I had in mind was to make a Macropad that could adjust volume, link to youtube videos/music and copy&paste. I designed the case to expose the pcb as I like to see my work and so I could fix any issues. :)
+The main goal I had in mind was to make a Macropad that could adjust volume with the rotary encoder, link to youtube videos/music with the top two keys and copy,paste &select all with the bottom three. I designed the case to expose the pcb as I like to see my work and so I could fix any issues. :)
+
+
 
 <h2>Final</h2>
-I will make an additional section when I make the macropad!
+I will make an additional section when I get the macropad!
 
 
 made with ❤️ for blueprint
