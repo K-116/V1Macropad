@@ -1,5 +1,6 @@
 # K116's hackpad 
 this is my hackpad for blueprint, I added an oled, button and rotary encoder to the project.
+ONSHAPE LINK: https://cad.onshape.com/documents/53970a0e40c7be582164b5b2
 
 <h2>Here is a my 3d design</h2>
 <img width="1055" height="982" alt="image" src="https://github.com/user-attachments/assets/496b5c8b-5761-448a-bde7-280686290e01" />
