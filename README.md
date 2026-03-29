@@ -1,5 +1,5 @@
 # K116's hackpad 
-this is my hackpad for blueprint, I added an oled, button and rotary encoder to the project. I used FreeCad instead on Fusion360 the project file is avaliable.
+this is my hackpad for blueprint, I added an oled, button and rotary encoder to the project. I used FreeCad instead on Fusion360 the project file is avaliable <a href="https://github.com/K-116/V1Macropad/blob/main/k116finalproject.FCStd">here</a>
 
 <h2>Here is a my 3d design</h2>
 <img width="1055" height="982" alt="image" src="https://github.com/user-attachments/assets/496b5c8b-5761-448a-bde7-280686290e01" />
