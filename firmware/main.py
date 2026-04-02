@@ -7,68 +7,67 @@ from kmk.modules.layers import Layers
 from kmk.modules.encoder import EncoderHandler
 from kmk.extensions.media_keys import MediaKeys
 from kmk.extensions.RGB import RGB, AnimationModes
+from kmk.macros.simple import SimpleMacro
 
 # Initialize the Keyboard
 keyboard = KMKKeyboard()
 
 # --- HARDWARE CONFIGURATION ---
 
-# 1. SWITCH MATRIX
-# Update these pins to match your KiCad Routing!
-# Based on our design:
-keyboard.col_pins = (board.D1, board.D0, board.D4, board.D9) # Columns
-keyboard.row_pins = (board.D2, board.D3)                     # Rows
+# 1. SWITCH MATRIX (2 rows x 3 columns = 6 positions, using 5)
+keyboard.col_pins = (board.D1, board.D0, board.D4)  # 3 columns
+keyboard.row_pins = (board.D2, board.D3)            # 2 rows
 keyboard.diode_orientation = DiodeOrientation.COL2ROW
 
-# 2. ROTARY ENCODER
+# 2. ROTARY ENCODER (Volume control)
 encoder_handler = EncoderHandler()
 keyboard.modules.append(encoder_handler)
-# Pin A = D9, Pin B = D10 (Check your schematic!)
-encoder_handler.pins = ((board.D8, board.D7, None, False),)
+# Pin A = D6, Pin B = D7, Button = D8 (push-to-mute)
+encoder_handler.pins = ((board.D6, board.D7, board.D8, False),)
 
-# 3. RGB LEDS (Underglow)
-rgb = RGB(
-    pixel_pin=board.D9,    # Where your LED Data In is connected
-    num_pixels=1,          # You have 8 LEDs
-    val_limit=100,         # Brightness limit (max 255)
-    hue_default=0,
-    sat_default=255,
-    val_default=100,
-    animation_mode=AnimationModes.RAINBOW
-)
-keyboard.extensions.append(rgb)
 
-# 4. MODULES
+
+# 4. MODULES & EXTENSIONS
 keyboard.modules.append(Layers())
 keyboard.extensions.append(MediaKeys())
 
-# --- KEYMAPS ---
+# --- MACROS ---
 
-# Define special keys
-# MO(1) means "Momentary Layer 1" - hold to switch layers
-L1_KEY = KC.MO(1)
+# YouTube URL macro - types the URL when pressed
+youtube_macro = SimpleMacro(
+    text="https://www.youtube.com\n",  # \n presses Enter after typing
+    use_interval=False,
+    interval=0,
+)
 
-# Layer 0: Normal Shortcuts (Copy, Paste, Save, etc.)
-# Layer 1: Media Control (Volume, Play/Pause)
+# --- KEY LAYOUT ---
+# Physical layout:
+# TOP ROW:     [Play/Pause]  [YouTube URL]
+# BOTTOM ROW:  [Copy]        [Paste]        [Select All]
+#
+# Matrix layout (2 rows x 3 columns):
+# Row 0 (Top):     [0,0] = Play/Pause    [0,1] = YouTube    [0,2] = Unused
+# Row 1 (Bottom):  [1,0] = Copy          [1,1] = Paste       [1,2] = Select All
 
 keyboard.keymap = [
-    # LAYER 0 (Default)
+    # Default Layer
     [
-        KC.A,    KC.B,     KC.C,     KC.D,
-        KC.E,    KC.F,     KC.G,     L1_KEY, # Bottom right key switches layers
-    ],
-    # LAYER 1 (Held down)
-    [
-        KC.N1,   KC.N2,    KC.N3,    KC.N4,
-        KC.MUTE, KC.VOLU,  KC.VOLD,  KC.TRNS,
+        # Row 0 (Top row - 2 buttons)
+        KC.MPLY,                    # [0,0] Top-Left: Play/Pause
+        youtube_macro,              # [0,1] Top-Right: Types youtube.com URL
+        KC.NO,                      # [0,2] Top-Right corner: Not used
+        
+        # Row 1 (Bottom row - 3 buttons)
+        KC.LCTL(KC.C),              # [1,0] Bottom-Left: Copy (Ctrl+C)
+        KC.LCTL(KC.V),              # [1,1] Bottom-Middle: Paste (Ctrl+V)
+        KC.LCTL(KC.A),              # [1,2] Bottom-Right: Select All (Ctrl+A)
     ]
 ]
 
 # --- ENCODER MAP ---
-# [Layer 0 behavior, Layer 1 behavior]
+# Encoder always controls volume regardless of layer
 encoder_handler.map = [
-    ((KC.VOLU, KC.VOLD, KC.MUTE),), # Layer 0: Vol Up, Vol Down, Mute(if clicked)
-    ((KC.UP,   KC.DOWN, KC.ENT),),  # Layer 1: Arrow Up, Arrow Down, Enter
+    ((KC.VOLU, KC.VOLD, KC.MUTE),),  # Volume Up/Down, Mute on click
 ]
 
 if __name__ == '__main__':
